@@ -4,6 +4,11 @@ import dotenv from 'dotenv'
 import cookieParser from 'cookie-parser'
 import morgan from 'morgan'
 import helmet from 'helmet'
+import connectDB from './config/connectDb.js'
+
+
+
+
 const app = express()
 app.use(cors({
   credentials: true,
@@ -28,6 +33,11 @@ app.get("/", (req, res) => {
   })
 })
 
-app.listen(PORT, () => {
-  console.log("Server is Running", PORT)
+
+
+
+connectDB().then(() => {
+  app.listen(PORT, () => {
+    console.log("Server is Running", PORT)
+  })
 })
