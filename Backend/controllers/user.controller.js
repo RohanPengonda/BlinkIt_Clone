@@ -8,7 +8,7 @@ export async function registerUserController(request, response) {
 
 
 
-    if (!name || email || password) {
+    if (!name || !email || !password) {
       return response.status(400).json({
         message: "Provide Name,Email,Paasword",
         error: true,

@@ -11,7 +11,7 @@ const resend = new Resend(process.env.RESEND_API);
 const sendEmail = async ({ name, sendTo, subject, html }) => {
   try {
     const { data, error } = await resend.emails.send({
-      from: 'Blinkit <onboarding@resend.dev>',
+      from: 'Blinkit <noreply@rpengonda1.co.in>',
       to: sendTo,
       subject: subject,
       html: html,

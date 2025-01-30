@@ -5,7 +5,7 @@ import cookieParser from 'cookie-parser'
 import morgan from 'morgan'
 import helmet from 'helmet'
 import connectDB from './config/connectDb.js'
-
+import userRouter from './route/user.route.js'
 
 
 
@@ -17,7 +17,8 @@ app.use(cors({
 
 app.use(express.json())
 app.use(cookieParser())
-app.use(morgan())
+// app.use(morgan())
+app.use(morgan('combined'));  // or 'dev' or 'tiny' as per your needs
 app.use(helmet({
   crossOriginResourcePolicy: false
 }))
@@ -33,6 +34,7 @@ app.get("/", (req, res) => {
   })
 })
 
+app.use('/api/user', userRouter)
 
 
 
@@ -41,3 +43,5 @@ connectDB().then(() => {
     console.log("Server is Running", PORT)
   })
 })
+
+

@@ -31,8 +31,9 @@ const userSchema = new mongoose.Schema({
     default: false
   },
   last_login_date: {
-    type: date,
+    type: Date,
     default: ""
+
   },
   status: {
     type: String,
