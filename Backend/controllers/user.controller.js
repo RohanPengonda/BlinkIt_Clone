@@ -1,6 +1,7 @@
 import UserModel from "../models/user.model.js";
 import bcryptjs from 'bcryptjs'
 import verifyEmailTemplate from "../utils/verifyEmailTemplate.js";
+import sendEmail from "../config/sendEmail.js";
 
 export async function registerUserController(request, response) {
   try {
@@ -59,6 +60,42 @@ export async function registerUserController(request, response) {
       error: true,
       success: false
     })
+  }
+
+}
+
+export async function verifyEmailController(request, response) {
+  try {
+    const { code } = request.body
+
+    const user = await UserModel.findOne({ _id: code })
+
+    if (!user) {
+      return response.status(400).json({
+        message: "Invalid Code",
+        error: true,
+        success: false
+      })
+
+    }
+    const updateUser = await UserModel.updateOne({ _id: code }, {
+      verify_email: true
+    })
+    return response.json({
+      message: "Verification True",
+      error: true,
+      success: false
+    })
+
+
+
+  } catch (error) {
+    return response.status(500).json({
+      message: error.message || error,
+      error: true,
+      success: true
+    })
+
   }
 
 }
