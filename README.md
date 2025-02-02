@@ -17,4 +17,4 @@ A full-stack ecommerce web application inspired by BlinkIt, providing a seamless
 
 ✅ Admin panel for product & order management
 
-✅ Responsive UI with modern design
+✅ Responsive UI with modern design 
