@@ -3,9 +3,12 @@ import jwt from 'jsonwebtoken'
 
 const auth = async (request, response, next) => {
   try {
-    const token = request.cookie.accessToken || request?.header?.authorization.split(" ")[1]
 
-    // console.log(token)
+    console.log("Cookies:", request.cookies);
+
+    const token = request.cookies.accessToken || request?.header?.authorization?.split(" ")[1]
+
+    console.log(token)
 
     if (!token) {
       return response.status(401).json({

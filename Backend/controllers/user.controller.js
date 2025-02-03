@@ -2,10 +2,8 @@ import UserModel from "../models/user.model.js";
 import bcryptjs from 'bcryptjs'
 import verifyEmailTemplate from "../utils/verifyEmailTemplate.js";
 import sendEmail from "../config/sendEmail.js";
-import generateAccessToken from "../utils/generateAccessToken.js";
-
-import generateRefereshToken from "../utils/generateRefreshToken.js";
-
+import generatedAccessToken from '../utils/generatedAccessToken.js'
+import genertedRefreshToken from "../utils/genertedRefreshToken.js";
 
 
 export async function registerUserController(request, response) {
@@ -138,7 +136,7 @@ export async function loginController(request, response) {
       })
     }
 
-    const checkPassword = await bcryptjs.compare(password.user.password)
+    const checkPassword = await bcryptjs.compare(password, user.password)
 
     if (!checkPassword) {
       return response.status(400).json({
@@ -148,8 +146,8 @@ export async function loginController(request, response) {
       })
     }
 
-    const accesstoken = await generateAccessToken(user._id)
-    const refreshtoken = await generateAccessToken(user._id)
+    const accesstoken = await generatedAccessToken(user._id)
+    const refreshtoken = await genertedRefreshToken(user._id)
 
     const cookiesOption = {
       httpOnly: true,
@@ -158,7 +156,7 @@ export async function loginController(request, response) {
     }
 
     response.cookie('accessToken', accesstoken, cookiesOption)
-    response.cookie('refreshToken', refreshtoken, cookiesOption)
+    response.cookie('refreshtoken', refreshtoken, cookiesOption)
 
     return response.json({
       message: "Login SuccessFully",
@@ -194,8 +192,8 @@ export async function logoutController(request, response) {
       sameSite: "None"
     }
 
-    response.clearCookie("accesToken", cookiesOption)
-    response.clearCookie("refreshToken", cookiesOption)
+    response.clearCookie("accesstoken", cookiesOption)
+    response.clearCookie("refreshtoken", cookiesOption)
 
 
     const removeRefreshToken = await UserModel.findByIdAndUpdate(userid, {
@@ -207,10 +205,6 @@ export async function logoutController(request, response) {
       error: false,
       success: true,
     })
-
-
-
-
 
 
   } catch (error) {
