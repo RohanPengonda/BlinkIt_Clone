@@ -3,6 +3,8 @@ import bcryptjs from 'bcryptjs'
 import verifyEmailTemplate from "../utils/verifyEmailTemplate.js";
 import sendEmail from "../config/sendEmail.js";
 import generatedAccessToken from '../utils/generatedAccessToken.js'
+import generatedOtp from "../utils/generatedOtp.js";
+import forgotPasswordTemplate from "../utils/forgotPasswordTemplate.js";
 import genertedRefreshToken from "../utils/genertedRefreshToken.js";
 import uploadImageClodinary from "../utils/uploadImageClodinary.js";
 
@@ -307,6 +309,15 @@ export async function forgotPasswordController(request, response) {
     const update = await UserModel.findByIdAndUpdate(user._id, {
       forgot_password_otp: otp,
       forgot_password_expiry: new Date(expireTime).toISOString() //or we can save expire_Time also
+    })
+
+    await sendEmail({
+      sendTo: email,
+      subject: "Forgot Password from Blinkeyit",
+      html: forgotPasswordTemplate({
+        name: user.name,
+        otp: otp
+      })
     })
 
     return response.json({
