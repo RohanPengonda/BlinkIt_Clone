@@ -335,3 +335,54 @@ export async function forgotPasswordController(request, response) {
     })
   }
 }
+
+//verify forgort password otp
+export async function verifyForgotPasswordOtp(request, response) {
+
+  try {
+    const { email, otp } = request.body
+
+    if (!email || !otp) {
+      return response.status(400).json({
+        message: "Provide required field email,otp.",
+        error: true,
+        success: false
+      })
+    }
+    const user = await UserModel.findOne({ email })
+
+    if (!user) {
+      return response.status(400).json({
+        message: "Email Not Available",
+        error: true,
+        success: false
+      })
+    }
+
+    const currentTime = new Date()
+    if (user.forgot_password_expiry < currentTime) {
+      return response.status(400).json({
+        message: "Otp is Expired",
+        error: true,
+        success: false
+      })
+    }
+
+    if (otp !== user.forgot_password_otp) {
+      return response.status(400).json({
+        message: "Invalid Otp",
+        error: true,
+        success: false
+      })
+    }
+
+
+
+  } catch (error) {
+    return response.status(500).json({
+      message: error.message || error,
+      error: true,
+      success: false
+    })
+  }
+}
