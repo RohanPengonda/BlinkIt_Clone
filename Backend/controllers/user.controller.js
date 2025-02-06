@@ -110,7 +110,6 @@ export async function loginController(request, response) {
   try {
     const { email, password } = request.body
 
-
     if (!email || !password) {
       return response.status(400).json({
         message: "Provide Email and Password",
@@ -157,7 +156,7 @@ export async function loginController(request, response) {
     }
 
     response.cookie('accessToken', accesstoken, cookiesOption)
-    response.cookie('refreshtoken', refreshtoken, cookiesOption)
+    response.cookie('refreshToken', refreshtoken, cookiesOption)
 
     return response.json({
       message: "Login SuccessFully",
@@ -440,5 +439,61 @@ export async function resetPassword(request, response) {
       success: false
     })
   }
+
+}
+
+//refresh token controller
+
+export async function refreshToken(request, response) {
+  try {
+    const refreshToken = request.cookies.refreshToken || request?.headers?.authorization?.split(" ")[1]  /// [ Bearer token]
+
+    if (!refreshToken) {
+      return response.status(401).json({
+        message: "Invalid token",
+        error: true,
+        success: false
+      })
+    }
+
+    const verifyToken = await jwt.verify(refreshToken, process.env.SECRET_KEY_REFRESH_TOKEN)
+
+    if (!verifyToken) {
+      return response.status(401).json({
+        message: "token is expired",
+        error: true,
+        success: false
+      })
+    }
+
+    const userId = verifyToken?._id
+
+    const newAccessToken = await generatedAccessToken(userId)
+
+    const cookiesOption = {
+      httpOnly: true,
+      secure: true,
+      sameSite: "None"
+    }
+
+    response.cookie('accessToken', newAccessToken, cookiesOption)
+
+    return response.json({
+      message: "New Access token generated",
+      error: false,
+      success: true,
+      data: {
+        accessToken: newAccessToken
+      }
+    })
+
+  } catch (error) {
+    return response.status(500).json({
+      message: error.message || error,
+      error: true,
+      success: false
+    })
+  }
+
 
 }
