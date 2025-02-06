@@ -13,8 +13,6 @@ export async function registerUserController(request, response) {
   try {
     const { name, email, password } = request.body
 
-
-
     if (!name || !email || !password) {
       return response.status(400).json({
         message: "Provide Name,Email,Paasword",
@@ -303,12 +301,12 @@ export async function forgotPasswordController(request, response) {
       })
     }
 
-    const otp = generatedOtp()
+    const otp = await generatedOtp()
     const expireTime = new Date() + 60 * 60 * 1000     //1hr
 
     const update = await UserModel.findByIdAndUpdate(user._id, {
-      forgot_password_otp: otp,
-      forgot_password_expiry: new Date(expireTime).toISOString() //or we can save expire_Time also
+      forget_Password_Otp: otp,
+      forget_Password_Expiry: new Date(expireTime).toISOString() //or we can save expire_Time also
     })
 
     await sendEmail({
@@ -368,7 +366,7 @@ export async function verifyForgotPasswordOtp(request, response) {
       })
     }
 
-    if (otp !== user.forgot_password_otp) {
+    if (otp !== user.forget_Password_Otp) {
       return response.status(400).json({
         message: "Invalid Otp",
         error: true,
