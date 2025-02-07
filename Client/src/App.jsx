@@ -1,7 +1,18 @@
+import { Outlet } from "react-router-dom";
 import "./App.css";
+import Header from "./component/Header";
+import Footer from "./component/Footer";
 
 function App() {
-  return <main className="text-red-500">Blinkit</main>;
+  return (
+    <>
+      <Header />
+      <main>
+        <Outlet />
+        <Footer />
+      </main>
+    </>
+  );
 }
 
 export default App;
