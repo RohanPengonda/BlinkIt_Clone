@@ -7,10 +7,10 @@ function App() {
   return (
     <>
       <Header />
-      <main>
+      <main className="min-h-[78vh]">
         <Outlet />
-        <Footer />
       </main>
+      <Footer />
     </>
   );
 }
