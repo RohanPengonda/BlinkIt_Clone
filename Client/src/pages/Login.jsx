@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { FaRegEyeSlash } from "react-icons/fa6";
 import { FaRegEye } from "react-icons/fa6";
 import toast from "react-hot-toast";
@@ -117,7 +117,7 @@ const Login = () => {
         </form>
 
         <p>
-          Don't have account?{" "}
+          Dont have account?{" "}
           <Link
             to={"/register"}
             className="font-semibold text-green-700 hover:text-green-800"
