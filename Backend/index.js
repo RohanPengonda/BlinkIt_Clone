@@ -7,8 +7,6 @@ import helmet from 'helmet'
 import connectDB from './config/connectDb.js'
 import userRouter from './route/user.route.js'
 
-
-
 const app = express()
 app.use(cors({
   credentials: true,
