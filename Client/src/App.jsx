@@ -3,8 +3,16 @@ import "./App.css";
 import Header from "./component/Header";
 import Footer from "./component/Footer";
 import toast, { Toaster } from "react-hot-toast";
+import { useEffect } from "react";
+import fetchUserDetails from "./utils/fetchUserDetails";
 
 function App() {
+  const fetchUser = async () => {
+    const userData = await fetchUserDetails();
+  };
+  useEffect(() => {
+    fetchUser();
+  }, []);
   return (
     <>
       <Header />

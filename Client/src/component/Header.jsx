@@ -5,12 +5,15 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaRegUserCircle } from "react-icons/fa";
 import useMobile from "../Hooks/useMobile";
 import { FaCartPlus } from "react-icons/fa";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const [isMobile] = useMobile();
   const location = useLocation();
   const isSearchPage = location.pathname === "/search";
   const navigate = useNavigate();
+  const user = useSelector((state) => state?.user);
+
   const redirectToLoginPage = () => {
     navigate("/login");
   };
