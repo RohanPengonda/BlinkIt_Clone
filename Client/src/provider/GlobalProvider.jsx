@@ -9,7 +9,7 @@ import { pricewithDiscount } from "../utils/PriceWithDiscount";
 import { handleAddAddress } from "../store/addressSlice";
 import { setOrder } from "../store/orderSlice";
 
-export const GlobalContext = createContext(null);
+export const GlobalContext = createContext(0);
 
 export const useGlobalContext = () => useContext(GlobalContext);
 

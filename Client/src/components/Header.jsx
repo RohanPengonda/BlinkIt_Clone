@@ -22,7 +22,7 @@ const Header = () => {
   const cartItem = useSelector((state) => state.cartItem.cart);
   // const [totalPrice,setTotalPrice] = useState(0)
   // const [totalQty,setTotalQty] = useState(0)
-  const { totalPrice, totalQty } = useGlobalContext();
+  const { totalPrice, totalQty } = useGlobalContext(0);
   const [openCartSection, setOpenCartSection] = useState(false);
 
   const redirectToLoginPage = () => {

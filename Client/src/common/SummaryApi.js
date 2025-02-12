@@ -1,6 +1,5 @@
 export const baseURL = "http://localhost:8080"
 
-
 const SummaryApi = {
   register: {
     url: '/api/user/register',
@@ -38,7 +37,10 @@ const SummaryApi = {
     url: '/api/user/upload-avatar',
     method: 'put'
   },
-
+  updateUserDetails: {
+    url: '/api/user/update-user',
+    method: 'put'
+  },
 }
 
 export default SummaryApi
