@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import AddAddress from "../components/AddAddress";
 import { MdDelete } from "react-icons/md";
 import { MdEdit } from "react-icons/md";
-import EditAddressDetails from "../components/EditAddressDetails";
+import EditAddressDetails from "../components/EditAddressDetails.jsx";
 import Axios from "../utils/Axios";
 import SummaryApi from "../common/SummaryApi";
 import toast from "react-hot-toast";
