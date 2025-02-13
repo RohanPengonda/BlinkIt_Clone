@@ -50,6 +50,7 @@ const Address = () => {
         {addressList.map((address, index) => {
           return (
             <div
+              key={index}
               className={`border rounded p-3 flex gap-3 bg-white ${
                 !address.status && "hidden"
               }`}
