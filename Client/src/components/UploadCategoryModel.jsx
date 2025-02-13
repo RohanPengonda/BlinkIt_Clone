@@ -13,6 +13,11 @@ const UploadCategoryModel = ({ close }) => {
       };
     });
   };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
+
   return (
     <div>
       <section className="fixed top-0 bottom-0 left-0 right-0 p-4 bg-neutral-800 bg-opacity-60 flex items-center justify-center">
@@ -23,7 +28,7 @@ const UploadCategoryModel = ({ close }) => {
               <IoClose size={25} />
             </button>
           </div>
-          <form action="">
+          <form className="my-3 grid gap-2" onSubmit={handleSubmit}>
             <div className="grid gap-1">
               <label id="categoryName">Name</label>
               <input
@@ -35,6 +40,27 @@ const UploadCategoryModel = ({ close }) => {
                 onChange={handleOnChange}
                 className="bg-blue-50 p-2 border border-blue-100 focus-within:border-primary-200 outline-none rounded"
               />
+            </div>
+            <div className="grid gap-1">
+              <p>Image</p>
+              <div className="flex gap-4 flex-col lg:flex-row items-center">
+                <div className="border bg-blue-50 h-36 w-full lg:w-36 flex items-center justify-center rounded">
+                  <p className="text-sm text-neutral-500">No Image</p>
+                </div>
+                <label htmlFor="">
+                  {" "}
+                  <div
+                    disabled={!data.name}
+                    className={`
+                  ${
+                    !data.name ? "bg-gray-400" : "bg-primary-200"
+                  } px-4 py-2 rounded cursor-pointer`}
+                  >
+                    Upload Image
+                  </div>
+                  <input type="file" />
+                </label>
+              </div>
             </div>
           </form>
         </div>
