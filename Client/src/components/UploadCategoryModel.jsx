@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { IoClose } from "react-icons/io5";
+import uploadImage from "../utils/UploadImage";
 const UploadCategoryModel = ({ close }) => {
   const [data, setData] = useState({ name: "", image: "" });
 
@@ -16,6 +17,16 @@ const UploadCategoryModel = ({ close }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+  };
+
+  const handleUploadCategoryImage = async (e) => {
+    const file = e.target.files[0];
+    if (!file) {
+      return;
+    }
+
+    const Image = await uploadImage(file);
+    console.log(Image);
   };
 
   return (
@@ -47,10 +58,9 @@ const UploadCategoryModel = ({ close }) => {
                 <div className="border bg-blue-50 h-36 w-full lg:w-36 flex items-center justify-center rounded">
                   <p className="text-sm text-neutral-500">No Image</p>
                 </div>
-                <label htmlFor="">
+                <label htmlFor="uploadCategoryImage">
                   {" "}
                   <div
-                    disabled={!data.name}
                     className={`
                   ${
                     !data.name ? "bg-gray-400" : "bg-primary-200"
@@ -58,7 +68,13 @@ const UploadCategoryModel = ({ close }) => {
                   >
                     Upload Image
                   </div>
-                  <input type="file" />
+                  <input
+                    disabled={!data.name}
+                    onChange={handleUploadCategoryImage}
+                    type="file"
+                    id="uploadCategoryImage"
+                    className="hidden"
+                  />
                 </label>
               </div>
             </div>
