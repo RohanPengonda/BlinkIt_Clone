@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import UploadCategoryModel from "../components/UploadCategoryModel";
 import Loading from "../components/Loading";
 import NoData from "../components/NoData";
@@ -44,11 +44,23 @@ const CategoryPage = () => {
 
       {!categoryData[0] && !loading && <NoData />}
 
-      <div className="p-4 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-2">
+      <div className="p-4 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-2">
         {categoryData.map((category, index) => {
           return (
-            <div key={index} className="w-40 h-56 rounded shadow-md">
-              <img src={category.image} alt={category.name} className="w-52" />
+            <div key={index} className="w-32 h-56 group rounded shadow-md">
+              <img
+                src={category.image}
+                alt={category.name}
+                className="w-full object-scale-down"
+              />
+              <div className=" items-center h-9 flex gap-2">
+                <button className="flex-1 hover:bg-green-200 bg-green-100 text-green-600 font-medium py-1 rounded">
+                  Edit
+                </button>
+                <button className="flex-1 hover:bg-red-200 bg-red-100 text-red-600 font-medium py-1 rounded">
+                  Delete
+                </button>
+              </div>
             </div>
           );
         })}
