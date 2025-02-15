@@ -4,12 +4,17 @@ import Loading from "../components/Loading";
 import NoData from "../components/NoData";
 import Axios from "../utils/Axios";
 import SummaryApi from "../common/SummaryApi";
+import EditCategory from "../components/EditCategory";
 
 const CategoryPage = () => {
   const [openUploadCategory, setOpenUploadCategory] = useState(false);
-
   const [loading, setLoading] = useState(false);
   const [categoryData, setCategoryData] = useState([]);
+  const [openEdit, setOpenEdit] = useState(false);
+  const [editData, setEditData] = useState({
+    name: "",
+    image: "",
+  });
 
   const fetchCategory = async () => {
     try {
@@ -22,6 +27,7 @@ const CategoryPage = () => {
         setCategoryData(responseData.data);
       }
     } catch (error) {
+      console.log(error);
     } finally {
       setLoading(false);
     }
@@ -54,7 +60,13 @@ const CategoryPage = () => {
                 className="w-full object-scale-down"
               />
               <div className=" items-center h-9 flex gap-2">
-                <button className="flex-1 hover:bg-green-200 bg-green-100 text-green-600 font-medium py-1 rounded">
+                <button
+                  onClick={() => {
+                    setOpenEdit(true);
+                    setEditData(category);
+                  }}
+                  className="flex-1 hover:bg-green-200 bg-green-100 text-green-600 font-medium py-1 rounded"
+                >
                   Edit
                 </button>
                 <button className="flex-1 hover:bg-red-200 bg-red-100 text-red-600 font-medium py-1 rounded">
@@ -72,6 +84,14 @@ const CategoryPage = () => {
         <UploadCategoryModel
           fetchData={fetchCategory}
           close={() => setOpenUploadCategory(false)}
+        />
+      )}
+
+      {openEdit && (
+        <EditCategory
+          data={editData}
+          fetchData={fetchCategory}
+          close={() => setOpenEdit(false)}
         />
       )}
     </section>
