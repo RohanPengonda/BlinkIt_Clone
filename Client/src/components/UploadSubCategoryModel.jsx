@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { IoClose } from "react-icons/io5";
 import uploadImage from "../utils/UploadImage";
+import { useSelector } from "react-redux";
 
 const UploadSubCategoryModel = ({ close }) => {
   const [subcategorydata, setSubCategoryData] = useState({
@@ -9,6 +10,7 @@ const UploadSubCategoryModel = ({ close }) => {
     category: [],
   });
 
+  const allCategory = useSelector((state) => state.product.allCategory);
   const handleChange = (e) => {
     const { name, value } = e.target;
 
@@ -90,14 +92,44 @@ const UploadSubCategoryModel = ({ close }) => {
 
           <div className="grid gap-1">
             <label>Select Category</label>
-            <div className="border focus-within:border-primary-200">
+            <div className="border focus-within:border-primary-200 rounded outline-none">
               {/* display value */}
+              {subcategorydata.category.map((cat, index) => {
+                return <p key={cat._id + "selectedValue"}>{cat.name}</p>;
+              })}
+
               {/* select CAtegory */}
-              <select className="w-full p-2 bg-transparent " name="" id="">
+
+              <select
+                className="w-full p-2 bg-transparent border "
+                onChange={(e) => {
+                  const value = e.target.value;
+                  const categoryIndex = allCategory.find(
+                    (el) => el._id == value
+                  );
+                  setSubCategoryData((prev) => {
+                    return {
+                      ...prev,
+                      category: [...prev.category, categoryIndex],
+                    };
+                  });
+                }}
+              >
                 <option value={""} disabled>
                   {" "}
                   Select Category
                 </option>
+
+                {allCategory.map((category, index) => {
+                  return (
+                    <option
+                      value={category?._id}
+                      key={category._id + "subcategory"}
+                    >
+                      {category?.name}
+                    </option>
+                  );
+                })}
               </select>
             </div>
           </div>
