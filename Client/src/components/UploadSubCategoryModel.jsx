@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { IoClose } from "react-icons/io5";
 import uploadImage from "../utils/UploadImage";
 
-const UploadSubCategoryModel = () => {
+const UploadSubCategoryModel = ({ close }) => {
   const [subcategorydata, setSubCategoryData] = useState({
     name: "",
     image: "",
@@ -42,7 +42,7 @@ const UploadSubCategoryModel = () => {
       <div className="w-full max-w-5xl bg-white p-4 rounded ">
         <div className="flex items-center justify-between gap-3">
           <h1 className="font-semibold">Add Sub Category</h1>
-          <button>
+          <button onClick={close}>
             <IoClose size={25} />
           </button>
         </div>
@@ -85,6 +85,20 @@ const UploadSubCategoryModel = () => {
                   onChange={handleUploadSubCategoryImage}
                 />
               </label>
+            </div>
+          </div>
+
+          <div className="grid gap-1">
+            <label>Select Category</label>
+            <div className="border focus-within:border-primary-200">
+              {/* display value */}
+              {/* select CAtegory */}
+              <select className="w-full p-2 bg-transparent " name="" id="">
+                <option value={""} disabled>
+                  {" "}
+                  Select Category
+                </option>
+              </select>
             </div>
           </div>
         </form>
