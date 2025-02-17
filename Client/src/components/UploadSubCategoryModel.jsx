@@ -94,10 +94,18 @@ const UploadSubCategoryModel = ({ close }) => {
             <label>Select Category</label>
             <div className="border focus-within:border-primary-200 rounded outline-none">
               {/* display value */}
-              {subcategorydata.category.map((cat, index) => {
-                return <p key={cat._id + "selectedValue"}>{cat.name}</p>;
-              })}
-
+              <div className="flex flex-wrap gap-2">
+                {subcategorydata.category.map((cat, index) => {
+                  return (
+                    <p
+                      className="bg-white shadow-md px-1 m-1"
+                      key={cat._id + "selectedValue"}
+                    >
+                      {cat.name}
+                    </p>
+                  );
+                })}
+              </div>
               {/* select CAtegory */}
 
               <select
