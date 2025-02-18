@@ -2,6 +2,10 @@ import { useState } from "react";
 import { IoClose } from "react-icons/io5";
 import uploadImage from "../utils/UploadImage";
 import { useSelector } from "react-redux";
+import SummaryApi from "../common/SummaryApi";
+import Axios from "../utils/Axios";
+import toast from "react-hot-toast";
+import AxiosToastError from "../utils/AxiosToastError.js";
 
 const UploadSubCategoryModel = ({ close }) => {
   const [subcategorydata, setSubCategoryData] = useState({
@@ -23,7 +27,7 @@ const UploadSubCategoryModel = ({ close }) => {
   };
 
   const handleUploadSubCategoryImage = async (e) => {
-    const file = e.target.file[0];
+    const file = e.target.files[0];
     if (!file) {
       return;
     }
@@ -39,6 +43,38 @@ const UploadSubCategoryModel = ({ close }) => {
     });
   };
 
+  const handleRemoveCategorySelected = (categoryId) => {
+    const index = subcategorydata.category.findIndex(
+      (el) => el._id === categoryId
+    );
+    subcategorydata.category.splice(index, 1);
+    setSubCategoryData((prev) => {
+      return {
+        ...prev,
+      };
+    });
+  };
+
+  const handleSubmitSubCategory = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await Axios({
+        ...SummaryApi.createSubCategory,
+        data: subcategorydata,
+      });
+
+      const { data: responseData } = response;
+      if (responseData.success) {
+        toast.success(responseData.message);
+        if (close) {
+          close();
+        }
+      }
+    } catch (error) {
+      AxiosToastError(error);
+    }
+  };
+
   return (
     <section className="fixed top-0 right-0 bottom-0 left-0 bg-neutral-100 bg-opacity-70 z-50 flex items-center justify-center p-4">
       <div className="w-full max-w-5xl bg-white p-4 rounded ">
@@ -49,7 +85,7 @@ const UploadSubCategoryModel = ({ close }) => {
           </button>
         </div>
 
-        <form className="my-3 grid gap-3" action="">
+        <form className="my-3 grid gap-3" onSubmit={handleSubmitSubCategory}>
           <div className="grid gap-2">
             <label htmlFor="name"> Name</label>
             <input
@@ -98,10 +134,16 @@ const UploadSubCategoryModel = ({ close }) => {
                 {subcategorydata.category.map((cat, index) => {
                   return (
                     <p
-                      className="bg-white shadow-md px-1 m-1"
+                      className="bg-white shadow-md px-1 m-1 flex items-center gap-2"
                       key={cat._id + "selectedValue"}
                     >
                       {cat.name}
+                      <div
+                        className="cursor-pointer hover:text-red-600"
+                        onClick={() => handleRemoveCategorySelected(cat._id)}
+                      >
+                        <IoClose size={25} />
+                      </div>
                     </p>
                   );
                 })}
@@ -123,10 +165,7 @@ const UploadSubCategoryModel = ({ close }) => {
                   });
                 }}
               >
-                <option value={""} disabled>
-                  {" "}
-                  Select Category
-                </option>
+                <option value={""}> Select Category</option>
 
                 {allCategory.map((category, index) => {
                   return (
@@ -141,6 +180,18 @@ const UploadSubCategoryModel = ({ close }) => {
               </select>
             </div>
           </div>
+
+          <button
+            className={`px-4 py-2 border ${
+              subcategorydata.name &&
+              subcategorydata.image &&
+              subcategorydata.category[0]
+                ? "bg-primary-200 hover:bg-primary-100"
+                : "bg-gray-100"
+            } font-semibold`}
+          >
+            Submit
+          </button>
         </form>
       </div>
     </section>
