@@ -5,11 +5,17 @@ import SummaryApi from "../common/SummaryApi";
 import Axios from "../utils/Axios";
 import DisplayTable from "../components/DisplayTable";
 import { createColumnHelper } from "@tanstack/react-table";
+import ViewImage from "../components/ViewImage";
+import { LuPencil } from "react-icons/lu";
+import { MdDelete } from "react-icons/md";
+import { HiPencil } from "react-icons/hi";
+
 const SubCategoryPage = () => {
   const [openAddSubCategory, setOpenAddSubCategory] = useState(false);
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState([]);
   const columnHelper = createColumnHelper();
+  const [ImageURL, setImageURL] = useState("");
 
   const fetchSubCategory = async () => {
     try {
@@ -39,13 +45,16 @@ const SubCategoryPage = () => {
     }),
     columnHelper.accessor("image", {
       header: "Image",
-      cell: () => {
+      cell: ({ row }) => {
         return (
           <div className="flex justify-center items-center">
             <img
               src={row.original.image}
               alt={row.original.name}
-              className="w-20 h-20"
+              className="w-20 h-20 cursor-pointer"
+              onClick={() => {
+                setImageURL(row.original.image);
+              }}
             />
           </div>
         );
@@ -53,10 +62,39 @@ const SubCategoryPage = () => {
     }),
     columnHelper.accessor("category", {
       header: "Category",
+      cell: ({ row }) => {
+        return (
+          <>
+            {row.original.category.map((c, index) => {
+              return (
+                <p
+                  key={c._id + "table"}
+                  className="shadow-md px-1 inline-block"
+                >
+                  {c.name}
+                </p>
+              );
+            })}
+          </>
+        );
+      },
+    }),
+    columnHelper.accessor("_id", {
+      header: "Action",
+      cell: ({ row }) => {
+        return (
+          <div className="flex items-center justify-center gap-3">
+            <button className="p-2 bg-green-100 rounded-full hover:text-green-600">
+              <HiPencil size={20} />
+            </button>
+            <button className="p-2 bg-red-100  text-red-500 rounded-full hover:text-red-700">
+              <MdDelete size={20} />
+            </button>
+          </div>
+        );
+      },
     }),
   ];
-
-  console.log("xol:   ", column);
 
   return (
     <section className="">
@@ -79,6 +117,8 @@ const SubCategoryPage = () => {
       {openAddSubCategory && (
         <UploadSubCategoryModel close={() => setOpenAddSubCategory(false)} />
       )}
+
+      {ImageURL && <ViewImage url={ImageURL} close={() => setImageURL(" ")} />}
     </section>
   );
 };

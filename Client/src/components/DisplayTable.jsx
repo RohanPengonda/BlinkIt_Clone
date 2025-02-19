@@ -1,14 +1,15 @@
 import React from "react";
 import {
+  createColumnHelper,
   flexRender,
   getCoreRowModel,
   useReactTable,
 } from "@tanstack/react-table";
 
-const DisplayTable = ({ data, columns }) => {
+const DisplayTable = ({ data, column }) => {
   const table = useReactTable({
-    data,
-    columns: columns,
+    data: data,
+    columns: column,
     getCoreRowModel: getCoreRowModel(),
   });
 
