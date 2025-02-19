@@ -154,7 +154,7 @@ const SubCategoryPage = () => {
 
       {/* Display Data Table */}
 
-      <div>
+      <div className="overflow-auto w-[95vw]">
         <DisplayTable data={data} column={column} />
       </div>
 
