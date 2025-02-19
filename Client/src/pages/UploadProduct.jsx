@@ -62,12 +62,21 @@ const UploadProduct = () => {
           <div>
             <p>Image</p>
             <div>
-              <div className="bg-blue-50 h-24 border rounded flex items-center justify-center cursor-pointer">
+              <label
+                htmlFor="productImage"
+                className="bg-blue-50 h-24 border rounded flex items-center justify-center cursor-pointer"
+              >
                 <div className="text-center flex flex-col items-center justify-center">
                   <FaCloudUploadAlt size={28} />
                   <p>Upload Image</p>
                 </div>
-              </div>
+                <input
+                  className="hidden"
+                  type="file"
+                  name=""
+                  id="productImage"
+                />
+              </label>
               {/* Display Uploaded Images */}
               <div></div>
             </div>
