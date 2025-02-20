@@ -87,6 +87,8 @@ const UploadProduct = () => {
     });
   };
 
+  const handleSubmit = {};
+
   const handleAddField = () => {
     setData((prev) => {
       return {
