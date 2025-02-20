@@ -6,6 +6,7 @@ import uploadImage from "../utils/UploadImage";
 import { MdDelete } from "react-icons/md";
 import { useSelector } from "react-redux";
 import { IoClose } from "react-icons/io5";
+import AddFieldComponent from "../components/AddFieldComponent";
 
 const UploadProduct = () => {
   const [data, setData] = useState({
@@ -25,9 +26,11 @@ const UploadProduct = () => {
   const [viewImageURL, setViewImageURL] = useState("");
   const allCategory = useSelector((state) => state.product.allCategory);
   const allSubCategory = useSelector((state) => state.product.allSubCategory);
-
   const [selectCategory, setSelectCategory] = useState("");
   const [selectSubCategory, setSelectSubCategory] = useState("");
+
+  const [moreField, setMoreField] = useState([]);
+  const [openAddField, setOpenAddField] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -279,11 +282,79 @@ const UploadProduct = () => {
               </div>
             </div>
           </div>
+          {/* Unit  */}
+          <div className="grid gap-1">
+            <label htmlFor="unit"> Unit</label>
+            <input
+              id="unit"
+              name="unit"
+              type="number"
+              onChange={handleChange}
+              value={data.unit}
+              required
+              placeholder="Enter Product Unit:"
+              className="bg-blue-50 p-2 outline-none border focus-within:border-primary-200 rounded"
+            />
+          </div>
+          {/* Stock  */}
+          <div className="grid gap-1">
+            <label htmlFor="stock"> Stock</label>
+            <input
+              id="stock"
+              name="stock"
+              type="number"
+              onChange={handleChange}
+              value={data.stock}
+              required
+              placeholder="Enter Product Stock:"
+              className="bg-blue-50 p-2 outline-none border focus-within:border-primary-200 rounded"
+            />
+          </div>
+          {/* Price  */}
+          <div className="grid gap-1">
+            <label htmlFor="price"> Price</label>
+            <input
+              id="price"
+              name="price"
+              type="number"
+              onChange={handleChange}
+              value={data.price}
+              required
+              placeholder="Enter Product Price:"
+              className="bg-blue-50 p-2 outline-none border focus-within:border-primary-200 rounded"
+            />
+          </div>
+          {/* Discount  */}
+          <div className="grid gap-1">
+            <label htmlFor="discount"> Discount</label>
+            <input
+              id="discount"
+              name="discount"
+              type="number"
+              onChange={handleChange}
+              value={data.discount}
+              required
+              placeholder="Enter Product Discount:"
+              className="bg-blue-50 p-2 outline-none border focus-within:border-primary-200 rounded"
+            />
+          </div>
+
+          {/* Add More Fields  */}
+          <div
+            onClick={() => setOpenAddField(true)}
+            className="inline-block bg-primary-200 hover:bg-white py-1 px-3 w-32 text-center font-semibold border hover:border-primary-200 border-neutral-900 cursor-pointer rounded"
+          >
+            Add Fields
+          </div>
         </form>
       </div>
 
       {viewImageURL && (
         <ViewImage url={viewImageURL} close={() => setViewImageURL("")} />
+      )}
+
+      {openAddField && (
+        <AddFieldComponent close={() => setOpenAddField(false)} />
       )}
     </section>
   );
