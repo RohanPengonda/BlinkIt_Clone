@@ -28,9 +28,9 @@ const UploadProduct = () => {
   const allSubCategory = useSelector((state) => state.product.allSubCategory);
   const [selectCategory, setSelectCategory] = useState("");
   const [selectSubCategory, setSelectSubCategory] = useState("");
-
   const [moreField, setMoreField] = useState([]);
   const [openAddField, setOpenAddField] = useState(false);
+  const [fieldName, setFieldName] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -87,6 +87,20 @@ const UploadProduct = () => {
     });
   };
 
+  const handleAddField = () => {
+    setData((prev) => {
+      return {
+        ...prev,
+        more_details: {
+          ...prev.more_details,
+          [fieldName]: "",
+        },
+      };
+    });
+    setFieldName("");
+    setOpenAddField(false);
+  };
+
   return (
     <section>
       <div className="p-2  bg-white shadow-md flex items-center justify-between">
@@ -94,10 +108,13 @@ const UploadProduct = () => {
       </div>
 
       <div className="grid p-3">
-        <form className="grid gap-2" action="">
+        <form className="grid gap-4" onSubmit={handleSubmit} action="">
           {/* Product Name */}
           <div className="grid gap-1">
-            <label htmlFor="name"> Product Name:</label>
+            <label htmlFor="name" className="font-medium">
+              {" "}
+              Product Name:
+            </label>
             <input
               id="name"
               name="name"
@@ -111,7 +128,9 @@ const UploadProduct = () => {
           </div>
           {/* Product Description  */}
           <div className="grid gap-1">
-            <label htmlFor="description">Description:</label>
+            <label htmlFor="description" className="font-medium">
+              Description:
+            </label>
             <textarea
               id="description"
               name="description"
@@ -180,7 +199,9 @@ const UploadProduct = () => {
           </div>
           {/* Select Category  */}
           <div className="grid gap-1">
-            <label htmlFor="">Select Category: </label>
+            <label htmlFor="" className="font-medium">
+              Select Category:{" "}
+            </label>
             <div>
               <select
                 className="bg-blue-50 border w-full p-2 rounded"
@@ -228,7 +249,9 @@ const UploadProduct = () => {
           </div>
           {/* Select Sub-Catetgory  */}
           <div className="grid gap-1">
-            <label htmlFor="">Sub-Category: </label>
+            <label htmlFor="" className="font-medium">
+              Sub-Category:{" "}
+            </label>
             <div>
               <select
                 className="bg-blue-50 border w-full p-2 rounded"
@@ -284,7 +307,9 @@ const UploadProduct = () => {
           </div>
           {/* Unit  */}
           <div className="grid gap-1">
-            <label htmlFor="unit"> Unit</label>
+            <label htmlFor="unit" className="font-medium">
+              Unit
+            </label>
             <input
               id="unit"
               name="unit"
@@ -298,7 +323,10 @@ const UploadProduct = () => {
           </div>
           {/* Stock  */}
           <div className="grid gap-1">
-            <label htmlFor="stock"> Stock</label>
+            <label htmlFor="stock" className="font-medium">
+              {" "}
+              Stock
+            </label>
             <input
               id="stock"
               name="stock"
@@ -312,7 +340,10 @@ const UploadProduct = () => {
           </div>
           {/* Price  */}
           <div className="grid gap-1">
-            <label htmlFor="price"> Price</label>
+            <label htmlFor="price" className="font-medium">
+              {" "}
+              Price
+            </label>
             <input
               id="price"
               name="price"
@@ -326,7 +357,9 @@ const UploadProduct = () => {
           </div>
           {/* Discount  */}
           <div className="grid gap-1">
-            <label htmlFor="discount"> Discount</label>
+            <label htmlFor="discount" className="font-medium">
+              Discount
+            </label>
             <input
               id="discount"
               name="discount"
@@ -340,6 +373,32 @@ const UploadProduct = () => {
           </div>
 
           {/* Add More Fields  */}
+
+          {Object?.keys(data?.more_details)?.map((k, index) => {
+            return (
+              <div key="" className="grid gap-1">
+                <label htmlFor={k}> {k}</label>
+                <input
+                  id={k}
+                  type="text"
+                  onChange={(e) => {
+                    const value = e.target.value;
+                    setData((prev) => {
+                      return {
+                        ...prev,
+                        more_details,
+                        ...prev.more_details,
+                        [k]: value,
+                      };
+                    });
+                  }}
+                  value={data.more_details[k]}
+                  required
+                  className="bg-blue-50 p-2 outline-none border focus-within:border-primary-200 rounded"
+                />
+              </div>
+            );
+          })}
           <div
             onClick={() => setOpenAddField(true)}
             className="inline-block bg-primary-200 hover:bg-white py-1 px-3 w-32 text-center font-semibold border hover:border-primary-200 border-neutral-900 cursor-pointer rounded"
@@ -354,7 +413,12 @@ const UploadProduct = () => {
       )}
 
       {openAddField && (
-        <AddFieldComponent close={() => setOpenAddField(false)} />
+        <AddFieldComponent
+          value={fieldName}
+          onChange={(e) => setFieldName(e.target.value)}
+          submit={handleAddField}
+          close={() => setOpenAddField(false)}
+        />
       )}
     </section>
   );
