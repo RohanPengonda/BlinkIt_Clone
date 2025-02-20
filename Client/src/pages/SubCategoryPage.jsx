@@ -162,7 +162,7 @@ const SubCategoryPage = () => {
         <UploadSubCategoryModel close={() => setOpenAddSubCategory(false)} />
       )}
 
-      {ImageURL && <ViewImage url={ImageURL} close={() => setImageURL(" ")} />}
+      {ImageURL && <ViewImage url={ImageURL} close={() => setImageURL("")} />}
 
       {openEdit && (
         <EditSubCategory
