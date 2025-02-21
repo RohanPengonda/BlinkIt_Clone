@@ -7,6 +7,10 @@ import { MdDelete } from "react-icons/md";
 import { useSelector } from "react-redux";
 import { IoClose } from "react-icons/io5";
 import AddFieldComponent from "../components/AddFieldComponent";
+import Axios from "../utils/Axios";
+import AxiosToastError from "../utils/AxiosToastError";
+import SummaryApi from "../common/SummaryApi";
+import successAlert from "../utils/SuccessAlert";
 
 const UploadProduct = () => {
   const [data, setData] = useState({
@@ -87,7 +91,21 @@ const UploadProduct = () => {
     });
   };
 
-  const handleSubmit = {};
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await Axios({
+        ...SummaryApi.createProduct,
+        data: data,
+      });
+      const { data: responseData } = response;
+      if (responseData.success) {
+        successAlert(responseData.message);
+      }
+    } catch (error) {
+      AxiosToastError(error);
+    }
+  };
 
   const handleAddField = () => {
     setData((prev) => {
@@ -403,10 +421,14 @@ const UploadProduct = () => {
           })}
           <div
             onClick={() => setOpenAddField(true)}
-            className="inline-block bg-primary-200 hover:bg-white py-1 px-3 w-32 text-center font-semibold border hover:border-primary-200 border-neutral-900 cursor-pointer rounded"
+            className="inline-block hover:bg-primary-200 bg-white py-1 px-3 w-32 text-center font-semibold border border-primary-200 hover:border-neutral-900 cursor-pointer rounded"
           >
             Add Fields
           </div>
+
+          <button className="bg-primary-100 hover:bg-primary-200 py-2 rounded font-semibold">
+            Submit
+          </button>
         </form>
       </div>
 
