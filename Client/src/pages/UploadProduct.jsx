@@ -1,5 +1,5 @@
 import { FaCloudUploadAlt } from "react-icons/fa";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Loading from "../components/Loading";
 import ViewImage from "../components/ViewImage";
 import uploadImage from "../utils/UploadImage";
@@ -91,6 +91,20 @@ const UploadProduct = () => {
     });
   };
 
+  const handleAddField = () => {
+    setData((prev) => {
+      return {
+        ...prev,
+        more_details: {
+          ...prev.more_details,
+          [fieldName]: "",
+        },
+      };
+    });
+    setFieldName("");
+    setOpenAddField(false);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -107,19 +121,9 @@ const UploadProduct = () => {
     }
   };
 
-  const handleAddField = () => {
-    setData((prev) => {
-      return {
-        ...prev,
-        more_details: {
-          ...prev.more_details,
-          [fieldName]: "",
-        },
-      };
-    });
-    setFieldName("");
-    setOpenAddField(false);
-  };
+  useEffect(() => {
+    successAlert("Upload Successfully");
+  }, []);
 
   return (
     <section>
@@ -206,7 +210,7 @@ const UploadProduct = () => {
                         className="w-full h-full object-scale-down cursor-pointer"
                       />
                       <div
-                        onClick={handleDeleteImage(index)}
+                        onClick={() => handleDeleteImage(index)}
                         className="absolute bottom-0 right-0 p-1 bg-red-500 hover:bg-red-700 rounded text-white hidden group-hover:block cursor-pointer"
                       >
                         <MdDelete />
@@ -220,7 +224,7 @@ const UploadProduct = () => {
           {/* Select Category  */}
           <div className="grid gap-1">
             <label htmlFor="" className="font-medium">
-              Select Category:{" "}
+              Select Category:
             </label>
             <div>
               <select
@@ -242,7 +246,11 @@ const UploadProduct = () => {
               >
                 <option value="">Select Category</option>
                 {allCategory.map((c, index) => {
-                  return <option value={c?._id}>{c.name}</option>;
+                  return (
+                    <option key={index} value={c?._id}>
+                      {c.name}
+                    </option>
+                  );
                 })}
               </select>
               <div className="flex flex-wrap gap-3">
@@ -270,7 +278,7 @@ const UploadProduct = () => {
           {/* Select Sub-Catetgory  */}
           <div className="grid gap-1">
             <label htmlFor="" className="font-medium">
-              Sub-Category:{" "}
+              Sub-Category:
             </label>
             <div>
               <select
@@ -297,7 +305,7 @@ const UploadProduct = () => {
                 </option>
                 {allSubCategory.map((c, index) => {
                   return (
-                    <option key="" value={c?._id}>
+                    <option key={index} value={c?._id}>
                       {c.name}
                     </option>
                   );
@@ -333,7 +341,7 @@ const UploadProduct = () => {
             <input
               id="unit"
               name="unit"
-              type="number"
+              type="text"
               onChange={handleChange}
               value={data.unit}
               required
@@ -396,7 +404,7 @@ const UploadProduct = () => {
 
           {Object?.keys(data?.more_details)?.map((k, index) => {
             return (
-              <div key="" className="grid gap-1">
+              <div key={index} className="grid gap-1">
                 <label htmlFor={k}> {k}</label>
                 <input
                   id={k}
@@ -406,9 +414,10 @@ const UploadProduct = () => {
                     setData((prev) => {
                       return {
                         ...prev,
-                        more_details,
-                        ...prev.more_details,
-                        [k]: value,
+                        more_details: {
+                          ...prev.more_details,
+                          [k]: value,
+                        },
                       };
                     });
                   }}
