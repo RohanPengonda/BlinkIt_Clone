@@ -16,6 +16,7 @@ export const createProductController = async (request, response) => {
       more_details,
     } = request.body
     if (!name || !image[1] || !category[0] || !subCategory[0] || !unit || !price || !description) {
+
       return response.status(400).json({
         message: "Enter Required Details",
         error: true,
@@ -40,11 +41,12 @@ export const createProductController = async (request, response) => {
 
     const saveProduct = await product.save()
 
-    return response.status(400).json({
+    return response.json({
       message: "Product Added Successfully",
-      error: false,
+      data: saveProduct,
       success: true,
-      data: saveProduct
+      error: false,
+
     })
 
   } catch (error) {
