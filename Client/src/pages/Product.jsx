@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SummaryApi from "../common/SummaryApi";
 import AxiosToastError from "../utils/AxiosToastError";
 import Axios from "../utils/Axios";
@@ -24,6 +24,9 @@ const Product = () => {
       AxiosToastError(error);
     }
   };
+  useEffect(() => {
+    fetchProductData();
+  }, []);
   return <div>Product</div>;
 };
 
