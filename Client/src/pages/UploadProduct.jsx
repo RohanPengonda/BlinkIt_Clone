@@ -121,10 +121,6 @@ const UploadProduct = () => {
     }
   };
 
-  useEffect(() => {
-    successAlert("Upload Successfully");
-  }, []);
-
   return (
     <section>
       <div className="p-2  bg-white shadow-md flex items-center justify-between">
