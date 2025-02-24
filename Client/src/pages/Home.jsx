@@ -1,16 +1,25 @@
 import banner from "../assets/banner.jpg";
+import bannerMobile from "../assets/banner-mobile.jpg";
 const Home = () => {
   return (
-    <section>
-      <div className="container mx-auto my-4">
+    <section className="bg-white">
+      <div className="container mx-auto">
         <div
-          className={`h-full w-full min-h-full bg-blue-100 rounded ${
-            !banner && "animate-pulse"
+          className={`w-full h-full min-h-48 bg-blue-100 rounded ${
+            !banner && "animate-pulse my-2"
           } `}
         >
-          <img src={banner} alt="" className="w-full h-full" />
+          <img
+            src={banner}
+            className="w-full h-full hidden lg:block"
+            alt="banner"
+          />
+          <img
+            src={bannerMobile}
+            className="w-full h-full lg:hidden"
+            alt="banner"
+          />
         </div>
-        <div className="bg-blue-500 w-full h-full">sdmfn</div>
       </div>
     </section>
   );
