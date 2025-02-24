@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import SummaryApi from "../common/SummaryApi";
 import AxiosToastError from "../utils/AxiosToastError";
 import Axios from "../utils/Axios";
@@ -62,7 +62,6 @@ const ProductAdmin = () => {
 
   useEffect(() => {
     let flag = true;
-
     const interval = setTimeout(() => {
       if (flag) {
         fetchProductData();
@@ -98,6 +97,7 @@ const ProductAdmin = () => {
             {productData.map((p, index) => {
               return (
                 <ProductCardAdmin
+                  key={index}
                   data={p}
                   fetchProductData={fetchProductData}
                 />

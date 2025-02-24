@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
 
 const productSchema = new mongoose.Schema({
-
   name: {
     type: String,
   },
@@ -21,20 +20,17 @@ const productSchema = new mongoose.Schema({
       ref: 'subCategory'
     }
   ],
-
   unit: {
     type: String,
     default: ""
   },
-
   stock: {
     type: Number,
     default: null
   },
-
   price: {
     type: Number,
-    default: null
+    defualt: null
   },
   discount: {
     type: Number,
@@ -52,20 +48,20 @@ const productSchema = new mongoose.Schema({
     type: Boolean,
     default: true
   }
-
 }, {
   timestamps: true
 })
 
-// create text index 
+//create a text index
 productSchema.index({
   name: "text",
-  description: "text"
+  description: 'text'
 }, {
   name: 10,
   description: 5
 })
 
-const ProductsModel = mongoose.model('product', productSchema)
 
-export default ProductsModel
+const ProductModel = mongoose.model('product', productSchema)
+
+export default ProductModel
