@@ -5,9 +5,16 @@ const Home = () => {
   const loadingCategory = useSelector((state) => state.product.loadingCategory);
 
   const categoryData = useSelector((state) => state.product.allCategory);
+  const subCategoryData = useSelector((state) => state.product.allSubCategory);
 
-  const handleRedirectProductListpage = (id) => {};
-
+  const handleRedirectProductListpage = (id, cat) => {
+    const subCategory = subCategoryData.find((sub) => {
+      const filterData = sub.category.some((c) => {
+        return c._id == id;
+      });
+      return filterData ? true : null;
+    });
+  };
   return (
     <section className="bg-white">
       <div className="container mx-auto">
