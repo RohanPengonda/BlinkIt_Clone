@@ -2,7 +2,8 @@ import banner from "../assets/banner.jpg";
 import bannerMobile from "../assets/banner-mobile.jpg";
 import { useSelector } from "react-redux";
 import { validURLConvert } from "../utils/validURLConvert";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import CategoryWiseProductDisplay from "../components/CategoryWiseProductDisplay";
 
 const Home = () => {
   const loadingCategory = useSelector((state) => state.product.loadingCategory);
@@ -27,6 +28,7 @@ const Home = () => {
     navigate(url);
     // console.log(url);
   };
+
   return (
     <section className="bg-white">
       <div className="container mx-auto">
@@ -83,14 +85,16 @@ const Home = () => {
       </div>
 
       {/* // Display Category Products */}
-      <div>
-        <div className="container mx-auto p-4 flex items-center justify-between gap-2">
-          <h3>Atta,Rice & Dal</h3>
-          <Link to="" className="text-green-600 hover:text-green-400">
-            See All
-          </Link>
-        </div>
-      </div>
+
+      {categoryData.map((c, index) => {
+        return (
+          <CategoryWiseProductDisplay
+            key={c._id + "categorywiseproduct"}
+            id={c?._id}
+            name={c?.name}
+          />
+        );
+      })}
     </section>
   );
 };
