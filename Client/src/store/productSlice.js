@@ -2,9 +2,10 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialValue = {
   allCategory: [],
-  loadingCategory: false,
+
   allSubCategory: [],
-  product: []
+  product: [],
+  loadingCategory: false,
 }
 
 const productSlice = createSlice({
