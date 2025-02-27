@@ -33,6 +33,8 @@ const ProductDisplayPage = () => {
     } finally {
       setLoading(false);
     }
+
+    console.log(data);
   };
 
   useEffect(() => {
