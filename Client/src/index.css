@@ -17,3 +17,11 @@ body {
 .scrollbar-none::-webkit-scrollbar {
   display: none;
 }
+
+.scrollbarCustom::-webkit-scrollbar {
+  width: 7px;
+  @apply bg-slate-200;
+}
+.scrollbarCustom::-webkit-scrollbar-thumb {
+  @apply bg-blue-200 rounded-full;
+}
