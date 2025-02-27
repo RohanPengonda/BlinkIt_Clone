@@ -106,20 +106,22 @@ const ProductListPage = () => {
 
         {/* product  */}
 
-        <div className="">
-          <div className="bg-white shadow-md p-2 z-10">
-            <h3 className="font-semibold p-4">{subCategoryName}</h3>
+        <div className="sticky top-20">
+          <div className="bg-white shadow-md p-4 z-10">
+            <h3 className="font-semibold">{subCategoryName}</h3>
           </div>
-          <div className="min-h-[80vh] max-h-[70vh] overflow-auto">
-            <div className="grid  grid-cols-1 md:grid-cols-3 lg:grid-cols-4 p-4 gap-4 ">
-              {data.map((p, index) => {
-                return (
-                  <CardProduct
-                    data={p}
-                    key={p._id + "productSubCategory" + index}
-                  />
-                );
-              })}
+          <div>
+            <div className="min-h-[80vh] max-h-[80vh] overflow-y-auto relative">
+              <div className=" grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 p-4 gap-4 ">
+                {data.map((p, index) => {
+                  return (
+                    <CardProduct
+                      data={p}
+                      key={p._id + "productSubCategory" + index}
+                    />
+                  );
+                })}
+              </div>
             </div>
 
             {loading && <Loading />}
