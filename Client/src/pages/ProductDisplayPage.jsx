@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import AxiosToastError from "../utils/AxiosToastError";
 import Axios from "../utils/Axios";
@@ -8,6 +8,9 @@ import Divider from "../components/Divider";
 import AddToCartButton from "../components/AddToCartButton";
 import { DisplayPriceInRupees } from "../utils/DisplayPriceInRupees";
 import { pricewithDiscount } from "../utils/PriceWithDiscount";
+import image1 from "../assets/minute_delivery.png";
+import image2 from "../assets/Best_Prices_Offers.png";
+import image3 from "../assets/Wide_Assortment.png";
 
 const ProductDisplayPage = () => {
   const params = useParams();
@@ -62,7 +65,6 @@ const ProductDisplayPage = () => {
           <img
             src={data.image[image]}
             className="w-full h-full object-scale-down"
-            alt=""
           />
         </div>
         <div className="flex items-center justify-center gap-3 my-2">
@@ -113,6 +115,27 @@ const ProductDisplayPage = () => {
             </button>
           </div>
         </div>
+        <div></div>
+
+        <div className="my-4  hidden lg:grid gap-3 ">
+          <div>
+            <p className="font-semibold">Description</p>
+            <p className="text-base">{data.description}</p>
+          </div>
+          <div>
+            <p className="font-semibold">Unit</p>
+            <p className="text-base">{data.unit}</p>
+          </div>
+          {data?.more_details &&
+            Object.keys(data?.more_details).map((element, index) => {
+              return (
+                <div key={index + "point"}>
+                  <p className="font-semibold">{element}</p>
+                  <p className="text-base">{data?.more_details[element]}</p>
+                </div>
+              );
+            })}
+        </div>
       </div>
 
       <div className="p-4 lg:pl-7 text-base lg:text-lg">
@@ -150,6 +173,60 @@ const ProductDisplayPage = () => {
             <AddToCartButton data={data} />
           </div>
         )}
+        <h2 className="font-semibold">Why shop from binkeyit? </h2>
+        <div>
+          <div className="flex  items-center gap-4 my-4">
+            <img src={image1} alt="superfast delivery" className="w-20 h-20" />
+            <div className="text-sm">
+              <div className="font-semibold">Superfast Delivery</div>
+              <p>
+                Get your orer delivered to your doorstep at the earliest from
+                dark stores near you.
+              </p>
+            </div>
+          </div>
+          <div className="flex  items-center gap-4 my-4">
+            <img src={image2} alt="Best prices offers" className="w-20 h-20" />
+            <div className="text-sm">
+              <div className="font-semibold">Best Prices & Offers</div>
+              <p>
+                Best price destination with offers directly from the
+                nanufacturers.
+              </p>
+            </div>
+          </div>
+          <div className="flex  items-center gap-4 my-4">
+            <img src={image3} alt="Wide Assortment" className="w-20 h-20" />
+            <div className="text-sm">
+              <div className="font-semibold">Wide Assortment</div>
+              <p>
+                Choose from 5000+ products across food personal care, household
+                & other categories.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/****only mobile */}
+        <div className="my-4 grid gap-3 ">
+          <div>
+            <p className="font-semibold">Description</p>
+            <p className="text-base">{data.description}</p>
+          </div>
+          <div>
+            <p className="font-semibold">Unit</p>
+            <p className="text-base">{data.unit}</p>
+          </div>
+          {data?.more_details &&
+            Object.keys(data?.more_details).map((element, index) => {
+              return (
+                <div key={index}>
+                  <p className="font-semibold">{element}</p>
+                  <p className="text-base">{data?.more_details[element]}</p>
+                </div>
+              );
+            })}
+        </div>
       </div>
     </section>
   );
