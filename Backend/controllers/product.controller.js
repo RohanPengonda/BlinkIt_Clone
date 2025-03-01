@@ -240,3 +240,35 @@ export const updateProductDetails = async (request, response) => {
     })
   }
 }
+
+export const deleteProductDetails = async (request, response) => {
+  try {
+
+    const { _id } = request.body
+
+    if (!_id) {
+      return response.status(400).json({
+        message: error.message || error,
+        error: true,
+        success: false
+      })
+    }
+
+    const deleteProduct = await ProductModel.deleteOne({ _id: _id })
+
+    return response.json({
+      message: "Delete Successfully",
+      error: false,
+      success: true,
+      data: deleteProduct
+    })
+
+
+  } catch (error) {
+    return response.status(500).json({
+      message: error.message || error,
+      error: true,
+      success: false
+    })
+  }
+}

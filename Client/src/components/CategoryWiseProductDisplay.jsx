@@ -13,6 +13,7 @@ const CategoryWiseProductDisplay = ({ id, name }) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const containerRef = useRef();
+
   const subCategoryData = useSelector((state) => state.product.allSubCategory);
   const loadingCardNumber = new Array(6).fill(null);
 
