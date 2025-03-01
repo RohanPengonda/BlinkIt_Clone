@@ -208,3 +208,35 @@ export const getProductDetails = async (request, response) => {
     })
   }
 }
+
+export const updateProductDetails = async (request, response) => {
+  try {
+    const { _id } = request.body
+
+    if (!_id) {
+      return response.status(400).json({
+        message: "Provide Producd_id",
+        error: true,
+        success: false
+      })
+    }
+
+    const updateProduct = await ProductModel.updateOne({ _id: _id }, {
+      ...request.body
+    })
+
+    return response.json({
+      message: "Update Successfully",
+      error: false,
+      data: updateProduct,
+      success: true
+    })
+
+  } catch (error) {
+    return response.status(500).json({
+      message: error.message || error,
+      error: true,
+      success: false
+    })
+  }
+}
