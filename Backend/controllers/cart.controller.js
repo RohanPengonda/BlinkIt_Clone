@@ -13,6 +13,17 @@ export const addToCartItemController = async (request, response) => {
       })
     }
 
+    const checkItemCart = await CartProductModel.findOne({
+      userId: userId,
+      productId: productId,
+    })
+
+    if (checkItemCart) {
+      return response.status(400).json({
+        message: "Item already in Cart"
+      })
+    }
+
     const cartItem = new CartProductModel({
       quantity: 1,
       userId: userId,

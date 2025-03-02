@@ -32,11 +32,9 @@ const auth = async (request, response, next) => {
 
     next()
 
-    // console.log("decode:",decode)
-
   } catch (error) {
     return response.status(500).json({
-      message: error.message || error,
+      message: "You have not Logined...",
       error: true,
       success: false
     })
