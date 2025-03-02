@@ -1,15 +1,17 @@
 import { useEffect, useState } from "react";
-import { TypeAnimation } from "react-type-animation";
-import { FaSearch } from "react-icons/fa";
+import { IoSearch } from "react-icons/io5";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { FaRegArrowAltCircleLeft } from "react-icons/fa";
-import useMobile from "../Hooks/useMobile";
+import { TypeAnimation } from "react-type-animation";
+import { FaArrowLeft } from "react-icons/fa";
+import useMobile from "../hooks/useMobile";
 
 const Search = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [isSearchPage, setIsSearchPage] = useState(false);
   const [isMobile] = useMobile();
+  const params = useLocation();
+  const searchText = params.search.slice(3);
 
   useEffect(() => {
     const isSearch = location.pathname === "/search";
@@ -19,26 +21,32 @@ const Search = () => {
   const redirectToSearchPage = () => {
     navigate("/search");
   };
+
+  const handleOnChange = (e) => {
+    const value = e.target.value;
+    const url = `/search?q=${value}`;
+    navigate(url);
+  };
+
   return (
-    <div className="w-full min-w-[300px] lg:min-w-[420px] h-11 lg:h-12 rounded-lg border overflow-hidden flex items-center text-neutral-600 bg-slate-50 group focus-within:border-primary-200">
+    <div className="w-full  min-w-[300px] lg:min-w-[420px] h-11 lg:h-12 rounded-lg border overflow-hidden flex items-center text-neutral-500 bg-slate-50 group focus-within:border-primary-200 ">
       <div>
         {isMobile && isSearchPage ? (
           <Link
             to={"/"}
-            className="flex justify-center items-center h-full p-2 group-focus-within:text-primary-200 bg-white m-1"
+            className="flex justify-center items-center h-full p-2 m-1 group-focus-within:text-primary-200 bg-white rounded-full shadow-md"
           >
-            <FaRegArrowAltCircleLeft size={20} />
+            <FaArrowLeft size={20} />
           </Link>
         ) : (
           <button className="flex justify-center items-center h-full p-3 group-focus-within:text-primary-200">
-            <FaSearch size={23} />
+            <IoSearch size={22} />
           </button>
         )}
       </div>
-
       <div className="w-full h-full">
         {!isSearchPage ? (
-          //not in search bar
+          //not in search page
           <div
             onClick={redirectToSearchPage}
             className="w-full h-full flex items-center"
@@ -46,43 +54,39 @@ const Search = () => {
             <TypeAnimation
               sequence={[
                 // Same substring at the start will only be typed out once, initially
-                "Search 'bread'",
+                'Search "milk"',
                 1000, // wait 1s before replacing "Mice" with "Hamsters"
-                "Search 'milk'",
+                'Search "bread"',
                 1000,
-                "Search 'vegetables'",
+                'Search "sugar"',
                 1000,
-                "Search 'fruits'",
+                'Search "panner"',
                 1000,
-                "Search 'panner'",
+                'Search "chocolate"',
                 1000,
-                "Search 'sugar'",
+                'Search "curd"',
                 1000,
-                "Search 'rice'",
+                'Search "rice"',
                 1000,
-                "Search 'chocolates'",
+                'Search "egg"',
                 1000,
-                "Search 'chips'",
-                1000,
-                "Search 'curd'",
-                1000,
-                "Search 'egg'",
-                1000,
+                'Search "chips"',
               ]}
               wrapper="span"
               speed={50}
-              style={{ fontSize: "20px", display: "inline-block" }}
               repeat={Infinity}
             />
           </div>
         ) : (
-          // in Search Bar
+          //when i was search page
           <div className="w-full h-full">
             <input
-              className="bg-transparent w-full h-full outline-none"
               type="text"
+              placeholder="Search for atta dal and more."
               autoFocus
-              placeholder="Search for "
+              defaultValue={searchText}
+              className="bg-transparent w-full h-full outline-none"
+              onChange={handleOnChange}
             />
           </div>
         )}
