@@ -24,7 +24,7 @@ const AddToCartButton = ({ data }) => {
       setLoading(true);
 
       const response = await Axios({
-        ...SummaryApi.addTocart,
+        ...SummaryApi.addToCart,
         data: {
           productId: data?._id,
         },

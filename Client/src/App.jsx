@@ -57,10 +57,25 @@ function App() {
     }
   };
 
+  const fetchCartItem = async () => {
+    try {
+      const response = await Axios({
+        ...SummaryApi.getCartItem,
+      });
+      const { data: responseData } = response;
+
+      if (responseData.success) {
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     fetchUser();
     fetchCategory();
     fetchSubCategory();
+    fetchCartItem();
   }, []);
   return (
     <>
