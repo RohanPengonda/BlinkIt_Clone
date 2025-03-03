@@ -2,7 +2,7 @@ import { Outlet } from "react-router-dom";
 import "./App.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import toast, { Toaster } from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
 import { useEffect } from "react";
 import fetchUserDetails from "./utils/fetchUserDetails";
 import { setUserDetails } from "./store/userSlice";
@@ -14,6 +14,7 @@ import {
   setAllSubCategory,
   setLoadingCategory,
 } from "./store/productSlice";
+import { handleAddItemCart } from "./store/cartProduct";
 
 function App() {
   const dispatch = useDispatch();
@@ -65,6 +66,8 @@ function App() {
       const { data: responseData } = response;
 
       if (responseData.success) {
+        dispatch(handleAddItemCart(responseData.data));
+        console.log(handleAddItemCart(responseData.data));
       }
     } catch (error) {
       console.log(error);

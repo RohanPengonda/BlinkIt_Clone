@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import logo from "../assets/logo.png";
 import Search from "./Search";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaRegCircleUser } from "react-icons/fa6";
-import useMobile from "../Hooks/useMobile";
-import { FaCartPlus } from "react-icons/fa";
+import useMobile from "../hooks/useMobile";
+import { BsCart4 } from "react-icons/bs";
 import { useSelector } from "react-redux";
 import { GoTriangleDown, GoTriangleUp } from "react-icons/go";
 import UserMenu from "./UserMenu";
@@ -22,7 +22,7 @@ const Header = () => {
   const cartItem = useSelector((state) => state.cartItem.cart);
   // const [totalPrice,setTotalPrice] = useState(0)
   // const [totalQty,setTotalQty] = useState(0)
-  const { totalPrice, totalQty } = useGlobalContext(0);
+  const { totalPrice, totalQty } = useGlobalContext();
   const [openCartSection, setOpenCartSection] = useState(false);
 
   const redirectToLoginPage = () => {
@@ -129,7 +129,7 @@ const Header = () => {
               >
                 {/**add to card icons */}
                 <div className="animate-bounce">
-                  <FaCartPlus size={26} />
+                  <BsCart4 size={26} />
                 </div>
                 <div className="font-semibold text-sm">
                   {cartItem[0] ? (
