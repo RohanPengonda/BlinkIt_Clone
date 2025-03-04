@@ -44,7 +44,7 @@ const DisplayCartItem = ({ close }) => {
           {cartItem[0] ? (
             <>
               <div className="flex items-center justify-between px-4 py-2 bg-blue-100 text-blue-500 rounded-full">
-                <p>Your total savings</p>
+                <p>Your Total Savings</p>
                 <p>
                   {DisplayPriceInRupees(notDiscountTotalPrice - totalPrice)}
                 </p>
@@ -87,9 +87,9 @@ const DisplayCartItem = ({ close }) => {
                   })}
               </div>
               <div className="bg-white p-4">
-                <h3 className="font-semibold">Bill details</h3>
+                <h3 className="font-semibold">Bill Details</h3>
                 <div className="flex gap-4 justify-between ml-1">
-                  <p>Items total</p>
+                  <p>Total Amount:</p>
                   <p className="flex items-center gap-2">
                     <span className="line-through text-neutral-400">
                       {DisplayPriceInRupees(notDiscountTotalPrice)}
@@ -98,12 +98,12 @@ const DisplayCartItem = ({ close }) => {
                   </p>
                 </div>
                 <div className="flex gap-4 justify-between ml-1">
-                  <p>Quntity total</p>
+                  <p>Total Quantity :</p>
                   <p className="flex items-center gap-2">{totalQty} item</p>
                 </div>
                 <div className="flex gap-4 justify-between ml-1">
-                  <p>Delivery Charge</p>
-                  <p className="flex items-center gap-2">Free</p>
+                  <p>Delivery Charges:</p>
+                  <p className="flex items-center gap-2 font-bold">Free</p>
                 </div>
                 <div className="font-semibold flex items-center justify-between gap-4">
                   <p>Grand total</p>
