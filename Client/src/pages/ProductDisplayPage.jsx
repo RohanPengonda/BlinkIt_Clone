@@ -15,7 +15,7 @@ import image3 from "../assets/Wide_Assortment.png";
 const ProductDisplayPage = () => {
   const params = useParams();
   let productId = params?.product?.split("-").slice(-1)[0];
-  console.log(productId);
+  // console.log(productId);
   const [data, setData] = useState({
     name: "",
     image: [],
@@ -44,7 +44,7 @@ const ProductDisplayPage = () => {
       setLoading(false);
     }
 
-    console.log(data);
+    // console.log(data);
   };
 
   useEffect(() => {

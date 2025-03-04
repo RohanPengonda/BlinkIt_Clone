@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useGlobalContext } from "../provider/GlobalProvider";
 import Axios from "../utils/Axios";
 import SummaryApi from "../common/SummaryApi";

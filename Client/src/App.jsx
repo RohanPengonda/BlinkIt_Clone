@@ -14,7 +14,9 @@ import {
   setAllSubCategory,
   setLoadingCategory,
 } from "./store/productSlice";
-import GlobalProvider from "./provider/GlobalProvider";
+import GlobalProvider, { useGlobalContext } from "./provider/GlobalProvider";
+import { FaCartShopping } from "react-icons/fa6";
+import CartMobileLink from "./components/CartMobileLink";
 
 function App() {
   const dispatch = useDispatch();
@@ -73,6 +75,7 @@ function App() {
         </main>
         <Footer />
         <Toaster />
+        <CartMobileLink />
       </GlobalProvider>
     </>
   );
