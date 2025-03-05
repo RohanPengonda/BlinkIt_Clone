@@ -124,6 +124,10 @@ const SummaryApi = {
     url: '/api/cart/delete-cart-item',
     method: 'delete'
   },
+  createAddress: {
+    url: '/api/address/create',
+    method: 'post'
+  },
 
 
 }
