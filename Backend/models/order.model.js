@@ -1,19 +1,18 @@
 import mongoose from "mongoose";
 
 const orderSchema = new mongoose.Schema({
-
   userId: {
     type: mongoose.Schema.ObjectId,
-    ref: "User"
+    ref: 'User'
   },
   orderId: {
     type: String,
-    required: [true, "Provide orderId"],
+    required: [true, "Provide Order-Id"],
     unique: true
   },
-  product_Id: {
-    typr: mongoose.Schema.ObjectId,
-    ref: 'product'
+  productId: {
+    type: mongoose.Schema.ObjectId,
+    ref: "product"
   },
   product_details: {
     name: String,
@@ -35,13 +34,14 @@ const orderSchema = new mongoose.Schema({
     type: Number,
     default: 0
   },
+  totalAmt: {
+    type: Number,
+    default: 0
+  },
   invoice_receipt: {
     type: String,
     default: ""
   }
-
-
-
 }, {
   timestamps: true
 })

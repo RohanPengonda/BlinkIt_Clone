@@ -86,9 +86,9 @@ const Address = () => {
         })}
         <div
           onClick={() => setOpenAddress(true)}
-          className="h-16 bg-blue-50 border-2 border-dashed flex justify-center items-center cursor-pointer"
+          className="h-16 bg-blue-50 border-2 border-dashed flex justify-center items-center cursor-pointer font-semibold"
         >
-          Add address
+          ADD ADDRESS +
         </div>
       </div>
 
