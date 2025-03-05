@@ -128,6 +128,18 @@ const SummaryApi = {
     url: '/api/address/create',
     method: 'post'
   },
+  getAddress: {
+    url: '/api/address/get',
+    method: 'get'
+  },
+  updateAddress: {
+    url: '/api/address/update',
+    method: 'put'
+  },
+  deleteAddress: {
+    url: '/api/address/disable',
+    method: 'delete'
+  },
 
 
 }
