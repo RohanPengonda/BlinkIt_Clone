@@ -1,4 +1,5 @@
 // import Stripe from "../config/stripe.js";
+import Stripe from "stripe";
 import CartProductModel from "../models/cartproduct.model.js";
 import OrderModel from "../models/order.model.js";
 import UserModel from "../models/user.model.js";
@@ -38,6 +39,65 @@ export async function CashOnDeliveryOrderController(request, response) {
       success: true,
       data: generatedOrder
     })
+
+  } catch (error) {
+    return response.status(500).json({
+      message: error.message || error,
+      error: true,
+      success: false
+    })
+  }
+}
+
+export const pricewithDiscount = (price, dis = 1) => {
+  const discountAmout = Math.ceil((Number(price) * Number(dis)) / 100);
+  const actualPrice = Number(price) - Number(discountAmout);
+  return actualPrice;
+};
+
+
+export async function paymentController(request, response) {
+  try {
+    const userId = request.userId // auth middleware 
+    const { list_items, totalAmt, addressId, subTotalAmt } = request.body
+
+    const user = await UserModel.findById(userId)
+
+    const line_items = list_items.map(item => {
+      return {
+        price_data: {
+          currency: 'inr',
+          product_data: {
+            name: item.productId.name,
+            image: item.productId.image,
+            metadata: {
+              productId: item.productId._id
+            }
+          },
+          unit_amount: pricewithDiscount(item.productId.price, item.productId.discount)
+        },
+        adjustable_quantity: {
+          enabled: true,
+          minimum: 1
+        },
+        quantity: item.quantity
+      }
+    })
+
+    const params = {
+      submit_type: 'pay',
+      mode: 'payment',
+      payment_method_types: ['card'],
+      customer_email: user.email,
+      metadata: {
+        userId: userId,
+        addressId: addressId
+      },
+      line_items: line_items
+    }
+
+    const session = await Stripe.checkout.sessions.create(params)
+
 
   } catch (error) {
     return response.status(500).json({
