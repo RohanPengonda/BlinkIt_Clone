@@ -45,7 +45,7 @@ export const AddCategoryController = async (request, response) => {
 export const getCategoryController = async (request, response) => {
   try {
 
-    const data = await CategoryModel.find().sort({ createdAt: -1 })
+    const data = await CategoryModel.find().sort({ createdAt: 1 })
     return response.json({
       data: data,
       error: false,
