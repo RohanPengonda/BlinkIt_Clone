@@ -22,3 +22,11 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+#manual Changes
+node_modules
+Client/node_modules
+Backend/node_modules
+.env
+.Client/.env
+.Backend/.env
