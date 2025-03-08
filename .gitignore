@@ -28,5 +28,5 @@ node_modules
 Client/node_modules
 Backend/node_modules
 .env
-.Client/.env
-.Backend/.env
+Client/.env
+Backend/.env
