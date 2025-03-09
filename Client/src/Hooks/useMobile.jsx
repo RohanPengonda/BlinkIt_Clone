@@ -1,7 +1,9 @@
-import { useEffect, useState, React } from "react";
+import { useEffect, useState } from "react";
 
 const useMobile = (breakpoint = 768) => {
   const [isMobile, setIsMobile] = useState(window.innerWidth < breakpoint);
+
+  // Resize or Mobile Settings
 
   const handleResize = () => {
     const check = window.innerWidth < breakpoint;
