@@ -1,7 +1,8 @@
 🚀 BlinkIt Clone - Full Stack Ecommerce
 
-A full-stack ecommerce web application inspired by BlinkIt, providing a seamless grocery shopping experience with real-time updates, cart management, authentication, and payment integration.
+Client and Backend
 
+A full-stack ecommerce web application inspired by BlinkIt, providing a seamless grocery shopping experience with real-time updates, cart management, authentication, and payment integration.
 
 🌟 Features
 
@@ -17,4 +18,4 @@ A full-stack ecommerce web application inspired by BlinkIt, providing a seamless
 
 ✅ Admin panel for product & order management
 
-✅ Responsive UI with modern design 
+✅ Responsive UI with modern design
