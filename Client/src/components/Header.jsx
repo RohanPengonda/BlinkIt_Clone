@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import logo from "../assets/logo.png";
 import Search from "./Search";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -13,6 +13,7 @@ import { useGlobalContext } from "../provider/GlobalProvider";
 import DisplayCartItem from "./DisplayCartItem";
 
 const Header = () => {
+  // #Header Content
   const [isMobile] = useMobile();
   const location = useLocation();
   const isSearchPage = location.pathname === "/search";
