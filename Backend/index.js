@@ -15,11 +15,14 @@ import cartRouter from './route/cart.route.js'
 import addressRouter from './route/address.route.js'
 import orderRouter from './route/order.route.js'
 
+const FRONTEND_URL = https://binkey-it-clone.vercel.app
+
 const app = express()
 app.use(cors({
-  origin: process.env.FRONTEND_URL,
+  origin: FRONTEND_URL,
   credentials: true,
 }))
+
 
 app.options('*', cors()); // Handle CORS preflight requests
 
