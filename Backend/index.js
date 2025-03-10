@@ -1,7 +1,7 @@
 import express from 'express'
 import cors from 'cors'
 import dotenv from 'dotenv'
-dotenv.config()
+require('dotenv').config();
 import cookieParser from 'cookie-parser'
 import morgan from 'morgan'
 import helmet from 'helmet'
@@ -20,6 +20,8 @@ app.use(cors({
   origin: process.env.FRONTEND_URL,
   credentials: true,
 }))
+
+app.options('*', cors()); // Handle CORS preflight requests
 
 app.use(express.json())
 app.use(cookieParser())
