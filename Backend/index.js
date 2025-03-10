@@ -1,7 +1,7 @@
 import express from 'express'
 import cors from 'cors'
 import dotenv from 'dotenv'
-dotenv.config();
+require("dotenv").config();
 import cookieParser from 'cookie-parser'
 import morgan from 'morgan'
 import helmet from 'helmet'
@@ -14,20 +14,24 @@ import productRouter from './route/product.route.js'
 import cartRouter from './route/cart.route.js'
 import addressRouter from './route/address.route.js'
 import orderRouter from './route/order.route.js'
-import setCorsHeaders from './middleware/setCorsHeaders.js';
 
 // const FRONTEND_URL = https://binkey-it-clone.vercel.app
 
 const app = express()
-app.use(cors({
-  origin: process.env.FRONTEND_URL,
-  credentials: true,
-}))
-
-app.use(setCorsHeaders);
+const cors = require("cors");
 
 
-// app.options('*', cors()); // Handle CORS preflight requests
+app.use(
+  cors({
+    origin: process.env.FRONTEND_URL, // Ensure it's correctly set
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
+
+// ✅ Handle Preflight (OPTIONS) Requests
+app.options("*", cors());
 
 app.use(express.json())
 app.use(cookieParser())
