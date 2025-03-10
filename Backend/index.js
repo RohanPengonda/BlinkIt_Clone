@@ -1,6 +1,7 @@
 import express from 'express'
 import cors from 'cors'
 import dotenv from 'dotenv'
+dotenv.config()
 import cookieParser from 'cookie-parser'
 import morgan from 'morgan'
 import helmet from 'helmet'
@@ -16,8 +17,8 @@ import orderRouter from './route/order.route.js'
 
 const app = express()
 app.use(cors({
+  origin: process.env.FRONTEND_URL,
   credentials: true,
-  origin: process.env.FRONTEND_URL
 }))
 
 app.use(express.json())
@@ -39,8 +40,6 @@ app.get("/", (req, res) => {
   })
 })
 
-
-
 app.use('/api/user', userRouter)
 app.use('/api/category', categoryRouter)
 app.use('/api/file', uploadRouter)
@@ -51,11 +50,8 @@ app.use('/api/address', addressRouter)
 app.use('/api/order', orderRouter)
 
 
-
 connectDB().then(() => {
   app.listen(PORT, () => {
     console.log("Server is Running", PORT)
   })
 })
-
-
