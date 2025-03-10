@@ -14,6 +14,7 @@ import productRouter from './route/product.route.js'
 import cartRouter from './route/cart.route.js'
 import addressRouter from './route/address.route.js'
 import orderRouter from './route/order.route.js'
+import setCorsHeaders from './middleware/setCorsHeaders.js';
 
 // const FRONTEND_URL = https://binkey-it-clone.vercel.app
 
@@ -23,8 +24,10 @@ app.use(cors({
   credentials: true,
 }))
 
+app.use(setCorsHeaders);
 
-app.options('*', cors()); // Handle CORS preflight requests
+
+// app.options('*', cors()); // Handle CORS preflight requests
 
 app.use(express.json())
 app.use(cookieParser())
