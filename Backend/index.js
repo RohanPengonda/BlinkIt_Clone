@@ -1,7 +1,6 @@
 import express from 'express'
 import cors from 'cors'
 import dotenv from 'dotenv'
-require("dotenv").config();
 import cookieParser from 'cookie-parser'
 import morgan from 'morgan'
 import helmet from 'helmet'
@@ -18,7 +17,7 @@ import orderRouter from './route/order.route.js'
 // const FRONTEND_URL = https://binkey-it-clone.vercel.app
 
 const app = express()
-const cors = require("cors");
+dotenv.config();
 
 
 app.use(
