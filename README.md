@@ -1,6 +1,6 @@
 🚀 BlinkIt Clone - Full Stack Ecommerce
 
-Client and Backend
+Full Stack Mern Application with Client and Backend
 
 A full-stack ecommerce web application inspired by BlinkIt, providing a seamless grocery shopping experience with real-time updates, cart management, authentication, and payment integration.
 
