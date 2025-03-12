@@ -1,3 +1,5 @@
+LIVE LINK:- https://binkey-it-clone.vercel.app/
+
 🚀 BlinkIt Clone - Full Stack E-commerce
 
 Developed a Blinkit-inspired e-commerce platform using the MERN stack, delivering a seamless online shopping experience. Built the frontend with React.js and the backend with Node.js and Express.js, using MongoDB for secure and scalable data storage.
@@ -23,3 +25,14 @@ Included an order history section for users to track past purchases and receipts
 ✅ Admin panel for product & order management
 
 ✅ Responsive UI with modern design
+
+ADMIN PANEL
+
+1. ADD & DELETE CATEGORY, SUBCATEGORY AND PRODUCTS
+
+CUSTOMERS PANEL
+
+1. REGISTER AND LOGIN
+2. VIEW PRODUCTS AND SHOP
+3. ADD TO CART
+4. SELECT/ADD ADDRESS AND PAYMENT MODES
